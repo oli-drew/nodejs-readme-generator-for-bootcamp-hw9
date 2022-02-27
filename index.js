@@ -1,6 +1,9 @@
 // Ask the user for information
 const inquirer = require("inquirer");
 const fs = require("fs");
+const chalk = require("chalk");
+
+console.log(chalk.blue("Hello world!"));
 
 inquirer
   .prompt([
