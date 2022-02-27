@@ -11,7 +11,7 @@ inquirer
     },
   ])
   .then((data) => {
-    const filename = `${data.name.toLowerCase().split(" ").join("-")}.md`;
+    const filename = `README.md`;
 
     fs.writeFile(filename, JSON.stringify(data, null, "\t"), (err) =>
       err ? console.log(err) : console.log("Success!")
