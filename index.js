@@ -5,10 +5,10 @@ const chalk = require("chalk");
 const figlet = require("figlet");
 
 // Exit application
-const exitGenerator = () => {
+const exitGenerator = (message) => {
   console.log(
     chalk.yellow(
-      figlet.textSync("See you again soon!", {
+      figlet.textSync(message, {
         font: "Small",
         horizontalLayout: "default",
         verticalLayout: "default",
@@ -35,7 +35,7 @@ const startGenerator = () => {
         // Start asking questions
         init();
       } else {
-        exitGenerator();
+        exitGenerator("Bye for now!");
       }
     });
 };
@@ -65,7 +65,7 @@ intro();
 // TODO: Create a function to write README file
 const writeToFile = (fileName, data) => {
   fs.writeFile(fileName, JSON.stringify(data, null, "\t"), (err) =>
-    err ? console.log(err) : console.log("Success!")
+    err ? console.log(err) : exitGenerator("Enjoy your ReadMe")
   );
 };
 
