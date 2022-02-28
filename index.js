@@ -95,7 +95,8 @@ const collectAnswers = async (userInputs = []) => {
     {
       type: "input",
       name: "installation",
-      message: "Please describe the steps required to install?",
+      message:
+        "Please list the steps required to install? (separate steps with a comma)",
       validate: validateResponse,
     },
     {
@@ -213,25 +214,19 @@ const renderLicense = (license) => {
   }
 };
 
-// // List Installation steps
-// const contributorsList = (contributors) => {
-//   let list = "";
-//   if (!contributors) {
-//     return;
-//   } else {
-//     contributors.split(",").forEach((person) => {
-//       list += `- ${person}\n`;
-//     });
-//   }
-//   return list;
-// };
+// List Installation steps
+const installSteps = (installation) => {
+  let steps = "";
+  installation.split(",").forEach((step) => {
+    steps += `- ${step}\n`;
+  });
+  return steps;
+};
 
 // List contributors
 const contributorsList = (contributors) => {
   let list = "";
-  if (!contributors) {
-    return;
-  } else {
+  if (contributors) {
     contributors.split(",").forEach((person) => {
       list += `- ${person}\n`;
     });
@@ -255,7 +250,7 @@ const renderReadMe = (answers) => {
   5. [Tests](#tests)
   6. [Questions](#questions)
   ## Installation
-  ${answers.installation}
+  ${installSteps(answers.installation)}
   ## Usage
   ${answers.usage}
   ## License
