@@ -1,3 +1,3 @@
 {
-	"Project Title": "oli"
+	"Project Title": ""
 }
