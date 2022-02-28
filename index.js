@@ -237,31 +237,31 @@ const contributorsList = (contributors) => {
 // Render ReadMe
 const renderReadMe = (answers) => {
   return `
-  ${renderLicense(answers.license)}
-  # ${answers.title}
-  ## Description
-  ${answers.description}
-  - - - -
-  ## Table of Contents
-  1. [Installation](#installation)
-  2. [Usage](#usage)
-  3. [License](#license)
-  4. [Contributing](#contributing)
-  5. [Tests](#tests)
-  6. [Questions](#questions)
-  ## Installation
-  ${installSteps(answers.installation)}
-  ## Usage
-  ${answers.usage}
-  ## License
-  This project is licensed under ${answers.license}.
-  ## Contributing
-  - ${answers.userName}
-  ${contributorsList(answers.contributors)}
-  ## Tests
-  ${answers.tests}
-  ## Questions
-  If you have any questions please contact me via [GitHub](https://github.com/${
+${renderLicense(answers.license)}
+# ${answers.title}
+## Description
+${answers.description}
+- - - -
+## Table of Contents
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [License](#license)
+4. [Contributing](#contributing)
+5. [Tests](#tests)
+6. [Questions](#questions)
+## Installation
+${installSteps(answers.installation)}
+## Usage
+${answers.usage}
+## License
+This project is licensed under ${answers.license}.
+## Contributing
+- ${answers.userName}
+${contributorsList(answers.contributors)}
+## Tests
+${answers.tests}
+## Questions
+If you have any questions please contact me via [GitHub](https://github.com/${
     answers.github
   }) or [Email](mailto:${answers.email})`;
 };
