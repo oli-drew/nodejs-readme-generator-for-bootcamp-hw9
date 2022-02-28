@@ -65,7 +65,7 @@ intro();
 
 // TODO: Create a function to write README file
 const writeToFile = (fileName, data) => {
-  fs.writeFile(fileName, JSON.stringify(data, null, "\t"), (err) =>
+  fs.writeFile(fileName, data, (err) =>
     err ? console.log(err) : exitGenerator("Enjoy your ReadMe")
   );
 };
@@ -89,7 +89,7 @@ const collectAnswers = async (userInputs = []) => {
     {
       type: "input",
       name: "description",
-      message: "Please tell me about your project in 200-500 characters?",
+      message: "Please tell me about your project in 100-500 characters?",
       validate: validateDescription,
     },
     {
@@ -131,7 +131,7 @@ const collectAnswers = async (userInputs = []) => {
     },
     {
       type: "input",
-      name: "gitHub",
+      name: "github",
       message: "Please provide your GitHub user name?",
       validate: validateResponse,
     },
@@ -152,9 +152,8 @@ const collectAnswers = async (userInputs = []) => {
 // Run the collectAnswers function and write to file
 async function init() {
   const inputs = await collectAnswers();
-  console.log(inputs);
   const filename = `SAMPLE.md`;
-  writeToFile(filename, inputs);
+  writeToFile(filename, renderReadMe(inputs[0]));
 }
 
 // Validate Response
@@ -170,10 +169,10 @@ const validateDescription = (response) => {
   const wordCount = response.length;
   if (!response) {
     return chalk.red("You have to type something!");
-  } else if (wordCount < 200) {
+  } else if (wordCount < 100) {
     return chalk.red(
       `Try and write a little more please! ${
-        200 - wordCount
+        100 - wordCount
       } more characters to go`
     );
   } else if (wordCount > 500) {
@@ -189,4 +188,34 @@ const validateEmail = (response) => {
   } else {
     return chalk.red("That's not a valid email address");
   }
+};
+
+// Render ReadMe
+const renderReadMe = (answers) => {
+  return `
+  Badge: ${answers.license}
+  # ${answers.title}
+  ## Description
+  ${answers.description}
+  - - - -
+  ## Table of Contents
+  1. [Installation](#installation)
+  2. [Usage](#usage)
+  3. [License](#license)
+  4. [Contributing](#contributing)
+  5. [Tests](#tests)
+  6. [Questions](#questions)
+  ## Installation
+  ${answers.installation}
+  ## Usage
+  ${answers.usage}
+  ## License
+  This project is licensed under ${answers.license}.
+  ## Contributing
+  ${answers.userName}
+  ## Tests
+  ${answers.tests}
+  ## Questions
+  If you have any questions please contact me via [GitHub](https://github.com/${answers.github}) or Email:
+  [Email](mailto:${answers.email})`;
 };
