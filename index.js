@@ -4,6 +4,19 @@ const fs = require("fs");
 const chalk = require("chalk");
 const figlet = require("figlet");
 
+// Exit application
+const exitGenerator = () => {
+  console.log(
+    chalk.yellow(
+      figlet.textSync("See you again soon!", {
+        font: "Small",
+        horizontalLayout: "default",
+        verticalLayout: "default",
+      })
+    )
+  );
+};
+
 // Ask the user if they would like to continue or exit
 const startGenerator = () => {
   inquirer
@@ -12,7 +25,7 @@ const startGenerator = () => {
         type: "list",
         name: "start",
         message: "Shall we get started?",
-        choices: ["Yes, Please!", "Nah"],
+        choices: ["Yes, Please!", "Nah, I hate great readme's"],
       },
     ])
     .then((data) => {
@@ -20,7 +33,7 @@ const startGenerator = () => {
       if (answer === "Yes, Please!") {
         console.log(answer);
       } else {
-        console.log(answer);
+        exitGenerator();
       }
     });
 };
