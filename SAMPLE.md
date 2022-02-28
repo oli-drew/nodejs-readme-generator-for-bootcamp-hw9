@@ -1,8 +1,8 @@
 
   [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-  # Awesome project 5000
+  # My project
   ## Description
-  many charrrsrsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+  ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
   - - - -
   ## Table of Contents
   1. [Installation](#installation)
@@ -12,13 +12,19 @@
   5. [Tests](#tests)
   6. [Questions](#questions)
   ## Installation
-  install it
+  install
   ## Usage
-  use it
+  use
   ## License
   This project is licensed under Apache.
   ## Contributing
-  Oliver Drew
+  - Oliver Drew
+  - jim
+-  paul
+-  bob
+-  jane
+-  sarah
+
   ## Tests
   test it
   ## Questions

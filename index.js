@@ -121,7 +121,7 @@ const collectAnswers = async (userInputs = []) => {
       type: "input",
       name: "contributors",
       message:
-        "Did anyone else contribute? If so, please list them! (Leave blank if just you)",
+        "List anyone else who contributed to this project (comma separated)",
     },
     {
       type: "input",
@@ -213,6 +213,32 @@ const renderLicense = (license) => {
   }
 };
 
+// // List Installation steps
+// const contributorsList = (contributors) => {
+//   let list = "";
+//   if (!contributors) {
+//     return;
+//   } else {
+//     contributors.split(",").forEach((person) => {
+//       list += `- ${person}\n`;
+//     });
+//   }
+//   return list;
+// };
+
+// List contributors
+const contributorsList = (contributors) => {
+  let list = "";
+  if (!contributors) {
+    return;
+  } else {
+    contributors.split(",").forEach((person) => {
+      list += `- ${person}\n`;
+    });
+  }
+  return list;
+};
+
 // Render ReadMe
 const renderReadMe = (answers) => {
   return `
@@ -235,7 +261,8 @@ const renderReadMe = (answers) => {
   ## License
   This project is licensed under ${answers.license}.
   ## Contributing
-  ${answers.userName}
+  - ${answers.userName}
+  ${contributorsList(answers.contributors)}
   ## Tests
   ${answers.tests}
   ## Questions
