@@ -1,4 +1,4 @@
-// TODO: Include packages needed for this application
+// Packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
 const chalk = require("chalk");
@@ -17,7 +17,7 @@ const exitGenerator = () => {
   );
 };
 
-// Ask the user if they would like to continue or exit
+// Ask the user if they would like to start or exit
 const startGenerator = () => {
   inquirer
     .prompt([
@@ -31,7 +31,9 @@ const startGenerator = () => {
     .then((data) => {
       const answer = data.start;
       if (answer === "Yes, Please!") {
-        console.log(answer);
+        console.log(chalk.green.bold("Okay, let's get started then!", "\n"));
+        // Start asking questions
+        init();
       } else {
         exitGenerator();
       }
@@ -51,7 +53,7 @@ const intro = () => {
   );
   console.log(
     chalk.bgGreen.bold.white(
-      "--- Let's create an awesome ReadMe for your project! ---",
+      "----- Let's create an awesome ReadMe for your project! -----",
       "\n"
     )
   );
@@ -60,30 +62,63 @@ const intro = () => {
 
 intro();
 
-// TODO: Create an array of questions for user input
-const questions = [];
+// Array of questions for user input
+const questions = [
+  {
+    type: "input",
+    question: "Title",
+    message: "What is the title of your project....?",
+  },
+  {
+    type: "input",
+    question: "Description",
+    message: "Please tell me about your project?",
+  },
+];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+const writeToFile = (fileName, data) => {
+  fs.writeFile(fileName, JSON.stringify(data, null, "\t"), (err) =>
+    err ? console.log(err) : console.log("Success!")
+  );
+};
 
 // TODO: Create a function to initialize app
 function init() {
+  // Question One
   inquirer
     .prompt([
       {
-        type: "input",
-        name: "Project Title",
-        message: "What is the title of your project?",
+        type: questions[0].type,
+        name: questions[0].question,
+        message: questions[0].message,
+      },
+      {
+        type: questions[1].type,
+        name: questions[1].question,
+        message: questions[1].message,
       },
     ])
     .then((data) => {
-      const filename = `README.md`;
+      // Log the answer
+      console.log(data);
 
-      fs.writeFile(filename, JSON.stringify(data, null, "\t"), (err) =>
-        err ? console.log(err) : console.log("Success!")
-      );
+      // writeToFile()
     });
 }
 
-// Function call to initialize app
-// init();
+// inquirer
+//       .prompt([
+//         {
+//           type: questions[0].type,
+//           name: questions[0].name,
+//           message: questions[0].message,
+//         },
+//       ])
+//       .then((data) => {
+//         const filename = `README.md`;
+
+//         fs.writeFile(filename, JSON.stringify(data, null, "\t"), (err) =>
+//           err ? console.log(err) : console.log("Success!")
+//         );
+//       });
