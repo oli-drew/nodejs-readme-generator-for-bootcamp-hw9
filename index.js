@@ -32,7 +32,7 @@ const startGenerator = () => {
     .then((data) => {
       const answer = data.start;
       if (answer === "Yes, Please!") {
-        console.log(chalk.green.bold("Okay, let's get started then!", "\n"));
+        console.log(chalk.green.bold("Okay, let's get a move on then!", "\n"));
         // Start asking questions
         init();
       } else {
@@ -190,10 +190,33 @@ const validateEmail = (response) => {
   }
 };
 
+// Function to render the license badge
+const renderLicense = (license) => {
+  switch (license) {
+    case "MIT":
+      return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+      break;
+    case "Apache":
+      return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+      break;
+    case "GPLv2":
+      return "[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)";
+      break;
+    case "GPLv3":
+      return "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+      break;
+    case "BSD 3-clause":
+      return "[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+      break;
+    case "No License":
+      return "";
+  }
+};
+
 // Render ReadMe
 const renderReadMe = (answers) => {
   return `
-  Badge: ${answers.license}
+  ${renderLicense(answers.license)}
   # ${answers.title}
   ## Description
   ${answers.description}
@@ -216,6 +239,8 @@ const renderReadMe = (answers) => {
   ## Tests
   ${answers.tests}
   ## Questions
-  If you have any questions please contact me via [GitHub](https://github.com/${answers.github}) or Email:
+  If you have any questions please contact me via [GitHub](https://github.com/${
+    answers.github
+  }) or Email:
   [Email](mailto:${answers.email})`;
 };
