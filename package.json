@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.0",
+    "email-validator": "^2.0.4",
     "figlet": "^1.5.2",
     "inquirer": "^6.3.1"
   }

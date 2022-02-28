@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const chalk = require("chalk");
 const figlet = require("figlet");
+const emailValidator = require("email-validator");
 
 // Exit application
 const exitGenerator = (message) => {
@@ -77,26 +78,31 @@ const collectAnswers = async (userInputs = []) => {
       type: "input",
       name: "userName",
       message: "First of all, what is your name?",
+      validate: validateResponse,
     },
     {
       type: "input",
       name: "title",
       message: "What is the title of your project?",
+      validate: validateResponse,
     },
     {
       type: "input",
       name: "description",
-      message: "Please tell me about your project in 50-100 words?",
+      message: "Please tell me about your project in 200-500 characters?",
+      validate: validateDescription,
     },
     {
       type: "input",
       name: "installation",
       message: "Please describe the steps required to install?",
+      validate: validateResponse,
     },
     {
       type: "input",
       name: "usage",
       message: "How do you use the application?",
+      validate: validateResponse,
     },
     {
       type: "list",
@@ -114,22 +120,26 @@ const collectAnswers = async (userInputs = []) => {
     {
       type: "input",
       name: "contributors",
-      message: "Did anyone else contribute? If so, please list them!",
+      message:
+        "Did anyone else contribute? If so, please list them! (Leave blank if just you)",
     },
     {
       type: "input",
       name: "tests",
       message: "What are the instructions to test this project?",
+      validate: validateResponse,
     },
     {
       type: "input",
       name: "gitHub",
       message: "Please provide your GitHub user name?",
+      validate: validateResponse,
     },
     {
       type: "input",
       name: "email",
       message: "Final question! What is your developer email address?",
+      validate: validateEmail,
     },
   ];
 
@@ -146,3 +156,37 @@ async function init() {
   const filename = `SAMPLE.md`;
   writeToFile(filename, inputs);
 }
+
+// Validate Response
+const validateResponse = (response) => {
+  if (!response) {
+    return chalk.red("You have to type something!");
+  }
+  return true;
+};
+
+// Validate Description Response
+const validateDescription = (response) => {
+  const wordCount = response.length;
+  if (!response) {
+    return chalk.red("You have to type something!");
+  } else if (wordCount < 200) {
+    return chalk.red(
+      `Try and write a little more please! ${
+        200 - wordCount
+      } more characters to go`
+    );
+  } else if (wordCount > 500) {
+    return chalk.red("That's too long, I'm bored.");
+  }
+  return true;
+};
+
+// Validate email address
+const validateEmail = (response) => {
+  if (emailValidator.validate(response)) {
+    return true;
+  } else {
+    return chalk.red("That's not a valid email address");
+  }
+};
