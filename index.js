@@ -62,20 +62,6 @@ const intro = () => {
 
 intro();
 
-// Array of questions for user input
-const questions = [
-  {
-    type: "input",
-    question: "Title",
-    message: "What is the title of your project....?",
-  },
-  {
-    type: "input",
-    question: "Description",
-    message: "Please tell me about your project?",
-  },
-];
-
 // TODO: Create a function to write README file
 const writeToFile = (fileName, data) => {
   fs.writeFile(fileName, JSON.stringify(data, null, "\t"), (err) =>
@@ -83,26 +69,32 @@ const writeToFile = (fileName, data) => {
   );
 };
 
-// TODO: Create a function to initialize app
-function init() {
-  // Question One
-  inquirer
-    .prompt([
-      {
-        type: questions[0].type,
-        name: questions[0].question,
-        message: questions[0].message,
-      },
-      {
-        type: questions[1].type,
-        name: questions[1].question,
-        message: questions[1].message,
-      },
-    ])
-    .then((data) => {
-      // Log the answer
-      console.log(data);
-      const filename = `SAMPLE.md`;
-      writeToFile(filename, data);
-    });
+// Collect answers asynchronously
+const collectAnswers = async (userInputs = []) => {
+  // Array of questions to ask
+  const questions = [
+    {
+      type: "input",
+      name: "Title",
+      message: "What is the title of your project....?",
+    },
+    {
+      type: "input",
+      name: "Description",
+      message: "Please tell me about your project?",
+    },
+  ];
+
+  // Collect answers in the newInputs array
+  const { again, ...answers } = await inquirer.prompt(questions);
+  const newInputs = [...userInputs, answers];
+  return again ? collectInputs(newInputs) : newInputs;
+};
+
+// Run the collectAnswers function and write to file
+async function init() {
+  const inputs = await collectAnswers();
+  console.log(inputs);
+  const filename = `SAMPLE.md`;
+  writeToFile(filename, inputs);
 }
