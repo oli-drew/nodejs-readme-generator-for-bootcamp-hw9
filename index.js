@@ -263,6 +263,5 @@ const renderReadMe = (answers) => {
   ## Questions
   If you have any questions please contact me via [GitHub](https://github.com/${
     answers.github
-  }) or Email:
-  [Email](mailto:${answers.email})`;
+  }) or [Email](mailto:${answers.email})`;
 };
