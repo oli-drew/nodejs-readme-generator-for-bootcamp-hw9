@@ -102,23 +102,7 @@ function init() {
     .then((data) => {
       // Log the answer
       console.log(data);
-
-      // writeToFile()
+      const filename = `SAMPLE.md`;
+      writeToFile(filename, data);
     });
 }
-
-// inquirer
-//       .prompt([
-//         {
-//           type: questions[0].type,
-//           name: questions[0].name,
-//           message: questions[0].message,
-//         },
-//       ])
-//       .then((data) => {
-//         const filename = `README.md`;
-
-//         fs.writeFile(filename, JSON.stringify(data, null, "\t"), (err) =>
-//           err ? console.log(err) : console.log("Success!")
-//         );
-//       });
