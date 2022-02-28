@@ -153,7 +153,7 @@ const collectAnswers = async (userInputs = []) => {
 // Run the collectAnswers function and write to file
 async function init() {
   const inputs = await collectAnswers();
-  const filename = `SAMPLE.md`;
+  const filename = `README.md`;
   writeToFile(filename, renderReadMe(inputs[0]));
 }
 
