@@ -53,7 +53,7 @@ const intro = () => {
   );
   console.log(
     chalk.bgGreen.bold.white(
-      "----- Let's create an awesome ReadMe for your project! -----",
+      "----- Let's create an awesome ReadMe for your new project! -----",
       "\n"
     )
   );
@@ -75,13 +75,61 @@ const collectAnswers = async (userInputs = []) => {
   const questions = [
     {
       type: "input",
-      name: "Title",
-      message: "What is the title of your project....?",
+      name: "userName",
+      message: "First of all, what is your name?",
     },
     {
       type: "input",
-      name: "Description",
-      message: "Please tell me about your project?",
+      name: "title",
+      message: "What is the title of your project?",
+    },
+    {
+      type: "input",
+      name: "description",
+      message: "Please tell me about your project in 50-100 words?",
+    },
+    {
+      type: "input",
+      name: "installation",
+      message: "Please describe the steps required to install?",
+    },
+    {
+      type: "input",
+      name: "usage",
+      message: "How do you use the application?",
+    },
+    {
+      type: "list",
+      name: "license",
+      message: "?",
+      choices: [
+        "MIT",
+        "Apache",
+        "GPLv2",
+        "GPLv3",
+        "BSD 3-clause",
+        "No License",
+      ],
+    },
+    {
+      type: "input",
+      name: "contributors",
+      message: "Did anyone else contribute? If so, please list them!",
+    },
+    {
+      type: "input",
+      name: "tests",
+      message: "What are the instructions to test this project?",
+    },
+    {
+      type: "input",
+      name: "gitHub",
+      message: "Please provide your GitHub user name?",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Final question! What is your developer email address?",
     },
   ];
 
